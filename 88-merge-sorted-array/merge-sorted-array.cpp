@@ -1,34 +1,32 @@
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        int x=0;
-        for(int i=m;i<n+m;i++){
-            nums1[i]=nums2[x];
-            x++;
-        }
-        // for(auto it:nums1){
-        //     cout<<it<<" ";
-        // }
-        int gap = (n+m)/2+(n+m)%2;
-        while(gap>0){
-            int left=0,right=gap;
-            while(right<(n+m)){
-                if(nums1[left]>nums1[right]){
-                    swap(nums1[left],nums1[right]);
-                }
-                left++;
-                right++;
-            }
-            if(gap!=1){
-                gap=(gap/2)+(gap%2);
-            }
-            else{
-                gap=(gap/2);
-            }
-            
-        }
-        // for(auto it:nums1){
-        //     cout<<it<<" ";
-        // }
-    }
+	vector<int>v(m);
+	for(int i=0;i<m;i++){
+		v[i]=nums1[i];
+	}
+	int x=0,i=0,j=0;
+	while(i<m&&j<n){
+		if(v[i]<=nums2[j]){
+			nums1[x]=v[i];
+			i++;
+		}
+		else{
+			nums1[x]=nums2[j];
+			j++;
+		}
+		x++;
+	}
+	while(i<m){
+		nums1[x]=v[i];
+		i++;
+		x++;
+	}
+	while(j<n){
+		nums1[x]=nums2[j];
+		j++;
+		x++;
+	}
+	
+}
 };
