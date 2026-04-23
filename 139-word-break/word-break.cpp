@@ -1,23 +1,23 @@
 class Solution {
 public:
-bool func(int ind,string &s,unordered_set<string>&wordDict,vector<int>&dp){
-	if(ind==s.size()){
-		return true;
-	}
-	if(dp[ind]!=-1){
-		return dp[ind];
-	}
-	for(int j=ind+1;j<=s.size();j++){
-		if(wordDict.count(s.substr(ind,j-ind))&&func(j,s,wordDict,dp)){
-			return dp[ind]=1;
-		}
-	}
-	return dp[ind]=0;
-}
-bool wordBreak(string s, vector<string>& wordDict) {
-	unordered_set<string>dict(wordDict.begin(),wordDict.end());
-	int n=s.size();
-	vector<int>dp(n,-1);
-	return func(0,s,dict,dp);
-}
+    bool func(int idx,string& s,unordered_set<string>&st,vector<int>&dp){
+        if(idx==s.size()){
+            return true;
+        }
+        if(dp[idx]!=-1){
+            return dp[idx];
+        }
+        for(int j=idx;j<s.size();j++){
+            string word=s.substr(idx,j-idx+1);
+            if(st.count(word)&&func(j+1,s,st,dp)){
+                return dp[idx]=1;
+            }
+        }
+        return dp[idx]=0;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string>st(wordDict.begin(),wordDict.end());
+        vector<int>dp(s.size(),-1);
+        return func(0,s,st,dp);
+    }
 };
