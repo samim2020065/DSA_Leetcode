@@ -1,10 +1,10 @@
 class Solution {
 public:
-bool isSubsequence(string s, string t) {
-        int x=0;
+    bool isSubsequence(string s, string t) {
         if(s.size()==0){
             return true;
         }
+        int x=0;
         for(int i=0;i<t.size();i++){
             if(t[i]==s[x]){
                 x++;
