@@ -17,14 +17,11 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        if(!head){
-            return NULL;
-        }
         Node* curr=head;
         while(curr){
-            Node* copyNode=new Node(curr->val);
-            copyNode->next=curr->next;
-            curr->next=copyNode;
+            Node* node = new Node(curr->val);
+            node->next=curr->next;
+            curr->next=node;
             curr=curr->next->next;
         }
         curr=head;
