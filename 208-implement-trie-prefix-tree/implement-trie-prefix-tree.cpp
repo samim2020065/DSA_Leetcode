@@ -26,7 +26,7 @@ public:
     
     void insert(string word) {
         Node* node=root;
-        for(char ch:word){
+        for(auto ch:word){
             if(!node->containsKey(ch)){
                 node->put(ch,new Node());
             }
@@ -37,7 +37,7 @@ public:
     
     bool search(string word) {
         Node* node=root;
-        for(char ch:word){
+        for(auto ch:word){
             if(!node->containsKey(ch)){
                 return false;
             }
@@ -48,7 +48,7 @@ public:
     
     bool startsWith(string prefix) {
         Node* node=root;
-        for(char ch:prefix){
+        for(auto ch:prefix){
             if(!node->containsKey(ch)){
                 return false;
             }
