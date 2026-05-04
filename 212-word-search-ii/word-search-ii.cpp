@@ -11,34 +11,33 @@ struct Node{
     Node* get(char ch){
         return links[ch-'a'];
     }
-    void setEnd(string &w){
-        flag=true;
+    void getEnd(string& w){
         word=w;
+        flag=true;
     }
     bool isEnd(){
         return flag;
     }
 };
 class Trie{
-public:
-    Node* root;
+public:Node* root;
     Trie(){
         root=new Node();
     }
-    void insert(string &word){
+    void insert(string word){
         Node* node=root;
-        for(char ch:word){
+        for(auto ch:word){
             if(!node->containsKey(ch)){
                 node->put(ch,new Node());
             }
             node=node->get(ch);
         }
-        node->setEnd(word);
+        node->getEnd(word);
     }
 };
 class Solution {
 public:
-    void dfs(int i,int j,vector<vector<char>>& board,Node* node,vector<string>&ans){
+    void dfs(int i,int j,vector<vector<char>>& board,Node* node,vector<string>& ans){
         char ch=board[i][j];
         if(ch=='#'||!node->containsKey(ch)){
             return;
@@ -65,15 +64,15 @@ public:
         board[i][j]=ch;
     }
     vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
-        Trie tri;
-        for(string word:words){
-            tri.insert(word);
+        Trie trie;
+        for(auto it:words){
+            trie.insert(it);
         }
         vector<string>ans;
         int n=board.size(),m=board[0].size();
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                dfs(i,j,board,tri.root,ans);
+                dfs(i,j,board,trie.root,ans);
             }
         }
         return ans;
