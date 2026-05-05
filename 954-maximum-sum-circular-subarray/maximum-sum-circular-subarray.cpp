@@ -1,18 +1,19 @@
 class Solution {
 public:
-int maxSubarraySumCircular(vector<int>& nums) {
-        int n=nums.size();
-        int curmin=0,globalmin=nums[0],curmax=0,globalmax=nums[0],totalsum=0;
-        for(int i=0;i<n;i++){
-            totalsum+=nums[i];
-            curmax=max(curmax+nums[i],nums[i]);
-            globalmax=max(globalmax,curmax);
-            curmin=min(curmin+nums[i],nums[i]);
-            globalmin=min(globalmin,curmin);
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int currMax=0,maxSum=INT_MIN;
+        int currMin=0,minSum=INT_MAX;
+        int total=0;
+        for(auto it:nums){
+            currMax=max(currMax+it,it);
+            maxSum=max(maxSum,currMax);
+            currMin=min(it,currMin+it);
+            minSum=min(minSum,currMin);
+            total+=it;
         }
-        if(globalmax<0){
-            return globalmax;
+        if(maxSum<0){
+            return maxSum;
         }
-        return max(globalmax,totalsum-globalmin);
+        return max(maxSum,total-minSum);
     }
 };
